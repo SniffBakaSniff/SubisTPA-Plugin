@@ -1,0 +1,57 @@
+name: SubisTPA
+version: '1.3'
+main: xyz.subaka.subistpa.SubisTPA
+api-version: '1.20'
+author: Subaka
+commands:
+
+  tpa:
+    description: Teleport to another player
+    usage: /tpa <player>
+    permission: subisTPA.tpa
+  tpaccept:
+    description: Accept a teleport request
+    usage: /tpaccept <player>
+    permission: subisTPA.tpaccept
+  tpdeny:
+    description: Deny a teleport request
+    usage: /tpdeny <player>
+    permission: subisTPA.tpdeny
+  tphere:
+    description: Teleport a player to your location
+    usage: /tphere <player>
+    permission: subisTPA.tphere
+  tpcancel:
+    description: Cancel a pending teleport request
+    usage: /tpcancel
+    permission: subisTPA.tpcancel
+
+  home:
+    description: Teleport to your home location
+    usage: /home [name]
+    permission: subisTPA.home
+  homes:
+    description: List your homes
+    usage: /homes
+    permission: subisTPA.homes
+  sethome:
+    description: Set your home location
+    usage: /sethome [name]
+    permission: subisTPA.sethome
+  delhome:
+    description: Delete your home location
+    usage: /delhome [name]
+    permission: subisTPA.delhome
+
+  warp:
+    description: Teleport to a warp location
+    usage: /warp <name>
+    permission: subisTPA.warp
+  setwarp:
+    description: Set a warp location
+    usage: /setwarp <name>
+    permission: subisTPA.setwarp
+  delwarp:
+    description: Delete a warp location
+    usage: /delwarp <name>
+    permission: subisTPA.delwarp
