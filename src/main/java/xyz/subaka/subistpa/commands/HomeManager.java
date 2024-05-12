@@ -117,7 +117,7 @@ public class HomeManager {
         playerHomesConfig.set(path + "pitch", location.getPitch());
 
         saveHomes(playerUUID);
-        player.sendMessage(ChatColor.GREEN + "Home '" + homeName + "' set!");
+        player.sendMessage(ChatColor.GOLD + "Home '" + homeName + "' set!");
     }
 
 
@@ -138,7 +138,7 @@ public class HomeManager {
 
         playerHomesConfig.set(path, null);
         saveHomes(playerUUID);
-        player.sendMessage(ChatColor.GREEN + "Home '" + homeName + "' removed!");
+        player.sendMessage(ChatColor.GOLD + "Home '" + homeName + "' removed!");
     }
 
     public Map<String, Location> getPlayerHomes(Player player) {

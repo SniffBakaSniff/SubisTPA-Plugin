@@ -4,11 +4,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.subaka.subistpa.commands.*;
-
-import java.util.UUID;
 
 public class SubisTPA extends JavaPlugin {
     private static SubisTPA instance;
@@ -25,7 +22,6 @@ public class SubisTPA extends JavaPlugin {
         instance = this;
         homeManager = new HomeManager(this, 5);
         homeManager.loadHomes();
-        // Load config.yml
         saveDefaultConfig();
 
         getLogger().info("SubisTPA Plugin has been enabled!");
@@ -43,7 +39,7 @@ public class SubisTPA extends JavaPlugin {
         getCommand("home").setTabCompleter(new HomeCommandTabCompleter(homeManager));
         getCommand("delhome").setTabCompleter(new HomeCommandTabCompleter(homeManager));
 
-        WarpManager warpManager = new WarpManager(this); // Instantiate your WarpManager implementation
+        WarpManager warpManager = new WarpManager(this);
         WarpCommand warpCommand = new WarpCommand(this, warpManager);
 
         getCommand("warp").setExecutor(warpCommand);
@@ -51,6 +47,11 @@ public class SubisTPA extends JavaPlugin {
         getCommand("delwarp").setExecutor(new DelWarp(warpManager));
         getCommand("warp").setTabCompleter(new WarpsTabCompleter(warpManager));
         getCommand("delwarp").setTabCompleter(new WarpsTabCompleter(warpManager));
+
+        getCommand("spawn").setExecutor(new SpawnCommand());
+        getCommand("setspawn").setExecutor(new SpawnCommand());
+
+
 
 
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);

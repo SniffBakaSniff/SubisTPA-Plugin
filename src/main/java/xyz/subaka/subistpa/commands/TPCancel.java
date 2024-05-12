@@ -13,7 +13,7 @@ public class TPCancel implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("Only players can use this command!");
+            sender.sendMessage(ChatColor.RED + "Only players can use this command!");
             return true;
         }
 
@@ -31,16 +31,16 @@ public class TPCancel implements CommandExecutor {
                 // Notify the receiver about the cancellation
                 Player receiverPlayer = player.getServer().getPlayer(teleportData.getReceiverUUID());
                 if (receiverPlayer != null && receiverPlayer.isOnline()) {
-                    receiverPlayer.sendMessage(ChatColor.YELLOW + player.getName() + " has canceled the teleport request.");
+                    receiverPlayer.sendMessage(ChatColor.GOLD + player.getName() + " has canceled the teleport request.");
                 }
 
-                player.sendMessage(ChatColor.GREEN + "Pending teleport request canceled!");
+                player.sendMessage(ChatColor.GOLD + "Pending teleport request canceled!");
                 break;
             }
         }
 
         if (!foundRequest) {
-            player.sendMessage(ChatColor.RED + "You don't have any pending teleport requests to cancel!");
+            player.sendMessage(ChatColor.GOLD + "You don't have any pending teleport requests to cancel!");
         }
 
         return true;

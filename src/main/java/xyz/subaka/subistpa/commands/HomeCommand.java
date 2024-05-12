@@ -30,12 +30,12 @@ public class HomeCommand implements CommandExecutor {
 
         if (label.equalsIgnoreCase("sethome")) {
             if (!player.hasPermission("subistpa.sethome")) {
-                player.sendMessage(ChatColor.RED + "You do not have permission to set a home.");
+                player.sendMessage(ChatColor.GOLD + "You do not have permission to set a home.");
                 return true;
             }
 
             if (args.length != 1) {
-                player.sendMessage(ChatColor.RED + "Usage: /sethome <homeName>");
+                player.sendMessage(ChatColor.GOLD + "Usage: /sethome <homeName>");
                 return true;
             }
 
@@ -47,25 +47,25 @@ public class HomeCommand implements CommandExecutor {
         }
         else if (label.equalsIgnoreCase("homes")) {
             if (!player.hasPermission("subistpa.homes")) {
-                player.sendMessage(ChatColor.RED + "You do not have permission to view homes.");
+                player.sendMessage(ChatColor.GOLD + "You do not have permission to view homes.");
                 return true;
             }
 
             Set<String> homeNames = homeManager.getPlayerHomeNames(player);
 
             if (homeNames.isEmpty()) {
-                player.sendMessage(ChatColor.YELLOW + "You don't have any homes set.");
+                player.sendMessage(ChatColor.GOLD + "You don't have any homes set.");
             } else {
-                player.sendMessage(ChatColor.GREEN + "Your Homes:");
+                player.sendMessage(ChatColor.GOLD + "Your Homes:");
                 for (String homeName : homeNames) {
-                    player.sendMessage(ChatColor.YELLOW + "- " + homeName);
+                    player.sendMessage(ChatColor.GOLD + "- " + homeName);
                 }
             }
             return true;
         }
         else if (label.equalsIgnoreCase("delhome")) {
             if (args.length != 1) {
-                player.sendMessage(ChatColor.RED + "Usage: /delhome <homeName>");
+                player.sendMessage(ChatColor.GOLD + "Usage: /delhome <homeName>");
                 return true;
             }
 
@@ -75,17 +75,25 @@ public class HomeCommand implements CommandExecutor {
         }
         else if (label.equalsIgnoreCase("home")) {
             if (args.length != 1) {
-                player.sendMessage(ChatColor.RED + "Usage: /home <homeName>");
-                return true;
+                Location spawnpoint = player.getRespawnLocation();
+                if (spawnpoint != null) {
+                    PlayerAndEntityTPUtils.teleportPlayerAndVehicle(player, spawnpoint);
+                    player.sendMessage(ChatColor.GOLD + "Teleported to your respawn location.");
+                    return true;
+                } else {
+                    player.sendMessage(ChatColor.GOLD + "Your respawn location is not set.");
+                    return true;
+                }
             }
+
 
             String homeName = args[0];
             Location homeLocation = homeManager.getHome(player, homeName);
             if (homeLocation != null) {
                 PlayerAndEntityTPUtils.teleportPlayerAndVehicle(player, homeLocation);
-                player.sendMessage(ChatColor.GREEN + "Teleported to home '" + homeName + "'.");
+                player.sendMessage(ChatColor.GOLD + "Teleported to home '" + homeName + "'.");
             } else {
-                player.sendMessage(ChatColor.RED + "You don't have a home named '" + homeName + "'.");
+                player.sendMessage(ChatColor.GOLD + "You don't have a home named '" + homeName + "'.");
             }
             return true;
         }

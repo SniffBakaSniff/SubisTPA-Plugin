@@ -28,12 +28,12 @@ public class WarpCommand implements CommandExecutor {
 
         if (label.equalsIgnoreCase("setwarp")) {
             if (args.length != 1) {
-                player.sendMessage(ChatColor.RED + "Usage: /setwarp <warpName>");
+                player.sendMessage(ChatColor.GOLD + "Usage: /setwarp <warpName>");
                 return true;
             }
 
             if (warpManager.getWarpCount(player) >= warpManager.maxWarpsPerPlayer) {
-                player.sendMessage(ChatColor.RED + "You have reached the maximum number of warps allowed.");
+                player.sendMessage(ChatColor.GOLD + "You have reached the maximum number of warps allowed.");
                 return true;
             }
 
@@ -44,7 +44,7 @@ public class WarpCommand implements CommandExecutor {
         }
         else if (label.equalsIgnoreCase("warp")) {
             if (args.length != 1) {
-                player.sendMessage(ChatColor.RED + "Usage: /warp <warpName>");
+                player.sendMessage(ChatColor.GOLD + "Usage: /warp <warpName>");
                 return true;
             }
 
@@ -52,28 +52,28 @@ public class WarpCommand implements CommandExecutor {
             Location warpLocation = warpManager.getWarp(warpName);
             if (warpLocation != null) {
                 player.teleport(warpLocation);
-                player.sendMessage(ChatColor.GREEN + "Teleported to warp '" + warpName + "'.");
+                player.sendMessage(ChatColor.GOLD + "Teleported to warp '" + warpName + "'.");
             } else {
-                player.sendMessage(ChatColor.RED + "Warp '" + warpName + "' not found.");
+                player.sendMessage(ChatColor.GOLD + "Warp '" + warpName + "' not found.");
             }
             return true;
         }
         else if (label.equalsIgnoreCase("delwarp")) {
             if (args.length != 1) {
-                player.sendMessage(ChatColor.RED + "Usage: /delwarp <warpName>");
+                player.sendMessage(ChatColor.GOLD + "Usage: /delwarp <warpName>");
                 return true;
             }
 
             String warpName = args[0];
             if (!warpManager.isWarpOwner(player, warpName)) {
-                player.sendMessage(ChatColor.RED + "You don't have permission to delete this warp.");
+                player.sendMessage(ChatColor.GOLD + "You don't have permission to delete this warp.");
                 return true;
             }
 
             if (!warpManager.removeWarp(player, warpName)) {
-                player.sendMessage(ChatColor.RED + "Failed to delete warp '" + warpName + "'.");
+                player.sendMessage(ChatColor.GOLD + "Failed to delete warp '" + warpName + "'.");
             } else {
-                player.sendMessage(ChatColor.GREEN + "Warp '" + warpName + "' deleted.");
+                player.sendMessage(ChatColor.GOLD + "Warp '" + warpName + "' deleted.");
             }
             return true;
         }

@@ -1,6 +1,7 @@
 package xyz.subaka.subistpa.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,14 +11,14 @@ public class TPAccept implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("Only players can use this command!");
+            sender.sendMessage(ChatColor.RED + "Only players can use this command!");
             return true;
         }
 
         Player player = (Player) sender;
 
         if (args.length < 1) {
-            player.sendMessage("Usage: /tpaccept <sender>");
+            player.sendMessage(ChatColor.GOLD + "Usage: /tpaccept <sender>");
             return true;
         }
 
@@ -25,7 +26,7 @@ public class TPAccept implements CommandExecutor {
         Player senderPlayer = Bukkit.getPlayer(senderName);
 
         if (senderPlayer == null || !senderPlayer.isOnline()) {
-            player.sendMessage("Player " + senderName + " is not online!");
+            player.sendMessage(ChatColor.GOLD + "Player " + senderName + " is not online!");
             return true;
         }
 

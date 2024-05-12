@@ -23,20 +23,20 @@ public class SetWarp implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length != 1) {
-            player.sendMessage(ChatColor.RED + "Usage: /setwarp <name>");
+            player.sendMessage(ChatColor.GOLD + "Usage: /setwarp <name>");
             return true;
         }
 
         String warpName = args[0];
         if (warpManager.maxWarpsPerPlayer >= 0 && warpManager.getWarpCount(player) >= warpManager.maxWarpsPerPlayer) {
-            player.sendMessage(ChatColor.RED + "You have reached the maximum number of warps allowed.");
+            player.sendMessage(ChatColor.GOLD + "You have reached the maximum number of warps allowed.");
             return true;
         }
 
         if (warpManager.setWarp(warpName, player.getLocation(), player)) {
-            player.sendMessage(ChatColor.GREEN + "Warp '" + warpName + "' set!");
+            player.sendMessage(ChatColor.GOLD + "Warp '" + warpName + "' set!");
         } else {
-            player.sendMessage(ChatColor.RED + "Failed to set warp '" + warpName + "'.");
+            player.sendMessage(ChatColor.GOLD + "Failed to set warp '" + warpName + "'.");
         }
         return true;
     }

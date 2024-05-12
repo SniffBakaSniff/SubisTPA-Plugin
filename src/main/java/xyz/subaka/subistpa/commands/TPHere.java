@@ -42,7 +42,7 @@ public class TPHere implements CommandExecutor {
 
         TPACommand.teleportRequests.put(target.getUniqueId(), new TeleportData(player.getUniqueId(), target.getUniqueId(),TeleportType.TPHERE));
 
-        player.sendMessage(ChatColor.GREEN + "Teleport request sent to " + target.getName() + "!");
+        player.sendMessage(ChatColor.GOLD + "Teleport request sent to " + target.getName() + "!");
 
         TPACommand.sendFancyTPHereMessage(target, player);
 

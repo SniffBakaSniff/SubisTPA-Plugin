@@ -32,24 +32,24 @@ public class TPACommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length != 1) {
-            player.sendMessage(ChatColor.YELLOW + "Usage: /tpa <player>");
+            player.sendMessage(ChatColor.GOLD + "Usage: /tpa <player>");
             return true;
         }
 
         Player target = player.getServer().getPlayer(args[0]);
 
         if (target == null || !target.isOnline()) {
-            player.sendMessage(ChatColor.YELLOW + "Player not found or not online!");
+            player.sendMessage(ChatColor.GOLD + "Player not found or not online!");
             return true;
         }
 
         if (target.equals(player)) {
-            player.sendMessage(ChatColor.YELLOW + "You can't teleport to yourself!");
+            player.sendMessage(ChatColor.GOLD + "You can't teleport to yourself!");
             return true;
         }
 
         if (teleportRequests.containsKey(target.getUniqueId())) {
-            player.sendMessage(ChatColor.YELLOW + "There's already a pending teleport request to " + target.getName() + "!");
+            player.sendMessage(ChatColor.GOLD + "There's already a pending teleport request to " + target.getName() + "!");
             return true;
         }
 
@@ -58,14 +58,14 @@ public class TPACommand implements CommandExecutor {
             public void run() {
                 if (teleportRequests.containsKey(target.getUniqueId())) {
                     teleportRequests.remove(target.getUniqueId());
-                    player.sendMessage(ChatColor.YELLOW + "Teleport request to " + target.getName() + " has timed out.");
+                    player.sendMessage(ChatColor.GOLD + "Teleport request to " + target.getName() + " has timed out.");
                 }
             }
         }.runTaskLater(plugin, 20 * 60);
 
         teleportRequests.put(target.getUniqueId(), new TeleportData(player.getUniqueId(), target.getUniqueId(), TeleportType.TPA));
 
-        player.sendMessage(ChatColor.GREEN + "Teleport request sent to " + target.getName() + "!");
+        player.sendMessage(ChatColor.GOLD + "Teleport request sent to " + target.getName() + "!");
 
         sendFancyMessage(target, player);
         return true;
@@ -124,16 +124,16 @@ public class TPACommand implements CommandExecutor {
 
             if (teleportData.getType() == TeleportType.TPA) {
                 PlayerAndEntityTPUtils.teleportPlayerAndVehicle(sender, target.getLocation());
-                sender.sendMessage(ChatColor.GREEN + "You have been teleported to " + target.getName() + ".");
+                sender.sendMessage(ChatColor.GOLD + "You have been teleported to " + target.getName() + ".");
             }
             else if (teleportData.getType() == TeleportType.TPHERE) {
                 PlayerAndEntityTPUtils.teleportPlayerAndVehicle(target, sender.getLocation());
-                target.sendMessage(ChatColor.GREEN + "You have been teleported to " + sender.getName() + ".");
+                target.sendMessage(ChatColor.GOLD + "You have been teleported to " + sender.getName() + ".");
             }
             return;
         }
 
-        target.sendMessage(ChatColor.YELLOW + "There are no pending teleport requests from " + sender.getName() + ".");
+        target.sendMessage(ChatColor.GOLD + "There are no pending teleport requests from " + sender.getName() + ".");
     }
 
     public static void handleDeny(Player target, String senderName) {
@@ -150,11 +150,11 @@ public class TPACommand implements CommandExecutor {
 
             Player sender = Bukkit.getPlayer(teleportData.getSenderUUID());
             if (sender != null && sender.isOnline()) {
-                sender.sendMessage(ChatColor.YELLOW + target.getName() + " has denied your teleport request.");
+                sender.sendMessage(ChatColor.GOLD + target.getName() + " has denied your teleport request.");
                 return;
             }
         }
 
-        target.sendMessage(ChatColor.YELLOW + "There are no pending teleport requests from " + senderName + ".");
+        target.sendMessage(ChatColor.GOLD + "There are no pending teleport requests from " + senderName + ".");
     }
 }

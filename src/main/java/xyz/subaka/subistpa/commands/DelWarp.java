@@ -23,23 +23,23 @@ public class DelWarp implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length != 1) {
-            player.sendMessage(ChatColor.RED + "Usage: /delwarp <name>");
+            player.sendMessage(ChatColor.GOLD + "Usage: /delwarp <name>");
             return true;
         }
 
         String warpName = args[0];
         if (warpManager.getWarp(warpName) == null) {
-            player.sendMessage(ChatColor.RED + "That warp does not exist!");
+            player.sendMessage(ChatColor.GOLD + "That warp does not exist!");
             return true;
         }
 
         if (!warpManager.isWarpOwner(player, warpName)) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to delete this warp!");
+            player.sendMessage(ChatColor.GOLD + "You do not have permission to delete this warp!");
             return true;
         }
 
         warpManager.removeWarp(player, warpName);
-        player.sendMessage(ChatColor.GREEN + "Warp '" + warpName + "' removed!");
+        player.sendMessage(ChatColor.GOLD + "Warp '" + warpName + "' removed!");
         return true;
     }
 }

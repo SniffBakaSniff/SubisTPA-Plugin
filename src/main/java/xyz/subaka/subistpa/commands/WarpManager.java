@@ -40,12 +40,12 @@ public class WarpManager {
         File warpFile = new File(warpsFolder, warpName + ".yml");
 
         if (warpFile.exists()) {
-            player.sendMessage(ChatColor.RED + "A warp with the name '" + warpName + "' already exists.");
+            player.sendMessage(ChatColor.GOLD + "A warp with the name '" + warpName + "' already exists.");
             return false;
         }
 
         if (maxWarpsPerPlayer >= 0 && getWarpCount(player) >= maxWarpsPerPlayer) {
-            player.sendMessage(ChatColor.RED + "You have reached the maximum number of warps allowed.");
+            player.sendMessage(ChatColor.GOLD + "You have reached the maximum number of warps allowed.");
             return false;
         }
 
@@ -91,15 +91,11 @@ public class WarpManager {
     public boolean isWarpOwner(Player player, String warpName) {
         File warpFile = new File(warpsFolder, warpName + ".yml");
         if (!warpFile.exists()) {
-            plugin.getLogger().log(Level.INFO, "Warp '" + warpName + "' does not exist.");
             return false;
         }
         FileConfiguration config = YamlConfiguration.loadConfiguration(warpFile);
         String ownerUUID = config.getString("lastowner");
         boolean isOwner = player.getUniqueId().toString().equals(ownerUUID);
-        if (!isOwner) {
-            plugin.getLogger().log(Level.INFO, player.getName() + " is not the owner of warp '" + warpName + "'.");
-        }
         return isOwner;
     }
 
@@ -140,7 +136,6 @@ public class WarpManager {
         File warpFile = new File(warpsFolder, warpName + ".yml");
 
         if (!warpFile.exists()) {
-            plugin.getLogger().warning("Warp '" + warpName + "' does not exist.");
             return false;
         }
 
@@ -148,15 +143,12 @@ public class WarpManager {
         String ownerUUID = config.getString("lastowner");
 
         if (!player.getUniqueId().toString().equals(ownerUUID)) {
-            plugin.getLogger().warning("Player '" + player.getName() + "' does not have permission to delete warp '" + warpName + "'.");
             return false;
         }
 
         if (warpFile.delete()) {
-            plugin.getLogger().info("Warp '" + warpName + "' deleted successfully.");
             return true;
         } else {
-            plugin.getLogger().warning("Failed to delete warp '" + warpName + "'.");
             return false;
         }
     }
